@@ -8,8 +8,9 @@ import {
   Switch,
   ScrollView,
   Alert,
+  Linking,
 } from 'react-native';
-import { useAudio } from '../Components/AudioScript'; // путь к AudioProvider
+import {useAudio} from '../Components/AudioScript'; // путь к AudioProvider
 
 // Иконки замените на свои пути
 const backIcon = require('../assets/arrowb.png');
@@ -18,9 +19,9 @@ const musicIcon = require('../assets/music.png');
 const shareIcon = require('../assets/share.png');
 const termsIcon = require('../assets/document.png');
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = ({navigation}) => {
   // Получаем состояние и управляющую функцию из контекста
-  const { isMusicPlaying, setIsMusicPlaying } = useAudio();
+  const {isMusicPlaying, setIsMusicPlaying} = useAudio();
 
   // Обработчик переключения музыки
   const handleToggleMusic = () => {
@@ -34,7 +35,10 @@ const SettingsScreen = ({ navigation }) => {
 
   // Обработчик для кнопки Terms of Use (функция не реализована)
   const handleTerms = () => {
-    Alert.alert('Coming soon', 'This feature will be added soon.');
+    //Alert.alert('Coming soon', 'This feature will be added soon.');
+    Linking.openURL(
+      'https://www.termsfeed.com/live/71d8c13d-a88e-449f-8436-dc80421cd368',
+    ); // Замените на реальный URL
   };
 
   // Кнопка «назад»
@@ -63,8 +67,8 @@ const SettingsScreen = ({ navigation }) => {
             <Text style={styles.settingText}>MUSIC</Text>
           </View>
           {/* Переключатель (Switch) */}
-          <Switch 
-            trackColor={{ false: '#767577', true: '#F7F0CE' }}
+          <Switch
+            trackColor={{false: '#767577', true: '#F7F0CE'}}
             thumbColor={isMusicPlaying ? '#000' : '#f4f3f4'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={handleToggleMusic}
@@ -72,13 +76,13 @@ const SettingsScreen = ({ navigation }) => {
           />
         </View>
 
-        {/* Блок Share the App */}
+        {/* Блок Share the App 
         <TouchableOpacity style={styles.settingBlock} onPress={handleShareApp}>
           <View style={styles.leftPart}>
             <Image source={shareIcon} style={styles.settingIcon} />
             <Text style={styles.settingText}>SHARE THE APP</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
 
         {/* Блок Terms of Use */}
         <TouchableOpacity style={styles.settingBlock} onPress={handleTerms}>
@@ -97,7 +101,7 @@ export default SettingsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#211F27',  // Тёмный фон
+    backgroundColor: '#211F27', // Тёмный фон
     paddingTop: 50,
   },
   header: {
